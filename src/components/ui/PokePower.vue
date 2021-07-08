@@ -10,3 +10,13 @@ export default {
   },
 };
 </script>
+<style>
+.sprite {
+  background: url("../../assets/sprite.png") no-repeat;
+  background-size: 280px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin: 2px;
+}
+</style>

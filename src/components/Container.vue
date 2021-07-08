@@ -1,16 +1,20 @@
 <template>
-  <div class="container mx-auto">
-    <!-- <router-link to="/"><button>volver</button></router-link> -->
+  <div class="container mx-auto" v-if="lista.length">
+    <div class="px-8">
+      <router-link to="/"
+        ><button class="btn-volver">Voler</button></router-link
+      >
+    </div>
     <div class="flex p-4 flex-col md:flex-row">
       <div class="box-border" style="width: 100%">
-        <List :lista="lista"></List>
+        <PokeList :lista="lista"></PokeList>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import List from "./List";
+import PokeList from "./PokeList";
 
 const data = [
   {
@@ -60,7 +64,7 @@ const data = [
 export default {
   name: "Container",
   components: {
-    List,
+    PokeList,
   },
   data: () => ({
     lista: data,
@@ -72,3 +76,16 @@ export default {
   },
 };
 </script>
+<style>
+.btn-volver {
+  background: rgb(0 0 0 / 68%);
+  border: solid 3px #014e9e;
+  width: 50px;
+  margin-top: 10px;
+  padding: 5px;
+  color: white;
+  font-size: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+</style>

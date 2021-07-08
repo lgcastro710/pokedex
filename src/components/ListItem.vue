@@ -77,6 +77,26 @@ export default {
 };
 </script>
 <style>
+.card-body {
+  height: 255px;
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-bottom: solid 5px black;
+  padding: 10px 0;
+}
+
+.card-footer {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  min-height: 82px;
+  position: relative;
+}
 .flip {
   position: relative;
   top: 0;

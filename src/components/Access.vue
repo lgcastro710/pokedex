@@ -1,10 +1,11 @@
 <template>
   <div class="bg-access w-full flex items-end">
     <router-link to="/store" class="w-full flex justify-center"
-      ><button class="btn-access w-2/4">Acceder</button></router-link
+      ><button class="btn-access w-1/4">Yo Te elijo!!</button></router-link
     >
   </div>
 </template>
+
 <style>
 .bg-access {
   background-image: url("../assets/bg-access.jpg");

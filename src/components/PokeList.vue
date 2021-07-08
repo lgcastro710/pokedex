@@ -1,5 +1,11 @@
 <template>
   <div class="col-12">
+    <div>
+      <img
+        src="../assets/poke-logo.png"
+        style="width: 380px; margin: AUTO; min-height: 140px"
+      />
+    </div>
     <div class="flex p-4">
       <input
         type="text"
@@ -7,6 +13,9 @@
         v-model="txtBuscar"
         placeholder="Buscar"
       />
+    </div>
+    <div class="p-4">
+      <FilterPower></FilterPower>
     </div>
     <Modal v-if="item" :onClose="onClose" :data="item"></Modal>
     <ul class="flex" style="flex-wrap: wrap">
@@ -23,6 +32,7 @@
 <script>
 import LisItem from "./ListItem";
 import Modal from "./ui/Modal";
+import FilterPower from "./FilterPower";
 export default {
   name: "List",
   props: {
@@ -32,6 +42,7 @@ export default {
   components: {
     LisItem,
     Modal,
+    FilterPower,
   },
   data: function () {
     return {
@@ -71,13 +82,21 @@ export default {
 </script>
 <style>
 input {
-  background-color: white !important;
+  background-color: rgb(0 0 0 / 68%) !important;
   border-radius: 10px !important;
-  border: solid 3px black !important;
+  border: solid 3px #4776fa !important;
 }
 h2,
 input,
 p {
   font-family: "Montserrat", sans-serif !important;
+  color: white;
+}
+.search-input {
+  width: 100%;
+  border: 0;
+  padding: 19px 10px;
+  outline: none;
+  text-align: center;
 }
 </style>
