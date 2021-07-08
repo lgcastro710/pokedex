@@ -66,22 +66,42 @@
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <Button :onClick="onClose"></Button>
+          <button v-on:click.prevent="onClose">
+            <i class="fa fa-close"></i>
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import Button from "./Button";
 export default {
   name: "Modal",
-  props: {
-    onClose: Function,
-    data: Object || String,
+  data: function () {
+    return {
+      item: null,
+    };
   },
-  components: {
-    Button,
+  props: {
+    data: Object || String,
+    onClose: Function,
   },
 };
 </script>
+<style>
+.btn-modal {
+  border: 4px solid #000;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-modal span {
+  background: black;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+}
+</style>

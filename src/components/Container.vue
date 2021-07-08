@@ -15,51 +15,7 @@
 
 <script>
 import PokeList from "./PokeList";
-
-const data = [
-  {
-    clave: "07028a40-5c5f-4762-b07b-39bfea40abfc",
-    descripcion: "Texto de prueba",
-    imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png",
-    nombre: "Pokemon 1",
-    id: "1",
-  },
-  {
-    clave: "15f099a0-7b12-46d7-b284-ead55d3f87f6",
-    descripcion: "Texto de prueba",
-    imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/010.png",
-    nombre: "Pokemon 2",
-    id: "2",
-  },
-  {
-    clave: "98ed1c9e-6a63-4416-b4a5-76862d74a9aa",
-    descripcion: "Texto de prueba",
-    imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png",
-    nombre: "Pkemon 3",
-    id: "3",
-  },
-  {
-    clave: "c84a0c5b-406a-4c29-ae79-bf3b499218bd",
-    descripcion: "Texto de prueba",
-    imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png",
-    nombre: "Pokemon 4",
-    id: "4",
-  },
-  {
-    clave: "d0094eec-1cf3-45bc-9a4d-3e16ed63e249",
-    descripcion: "Texto de prueba",
-    imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/063.png",
-    nombre: "Pokemon 5",
-    id: "5",
-  },
-  {
-    clave: "f0e81670-5b56-4724-88f6-d61de5395065",
-    descripcion: "Texto de prueba",
-    imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/012.png",
-    nombre: "Pokemon 6",
-    id: "6",
-  },
-];
+import axios from "axios";
 
 export default {
   name: "Container",
@@ -67,12 +23,31 @@ export default {
     PokeList,
   },
   data: () => ({
-    lista: data,
+    lista: [],
   }),
   methods: {
-    created: function () {
-      this.listarElementos();
+    listarElementos: async function () {
+      const pokeData = await axios
+        .get("https://pokeapi.co/api/v2/pokemon?limit=20&offset=000")
+        .then((response) => response.data.results);
+      pokeData.forEach(async (pokeInfo) => {
+        const pokemon = await axios
+          .get(pokeInfo.url)
+          .then((response) => response.data);
+        let imgId = pokemon.id;
+        if (pokemon.id < 10) {
+          imgId = "00" + pokemon.id;
+        }
+        if (pokemon.id > 9 && pokemon.id < 100) {
+          imgId = "0" + pokemon.id;
+        }
+        pokemon.imageUrl = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgId}.png`;
+        this.lista.push(pokemon);
+      });
     },
+  },
+  created: function () {
+    this.listarElementos();
   },
 };
 </script>

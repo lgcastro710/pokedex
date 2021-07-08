@@ -2,6 +2,10 @@
   <li class="w-full p-4 md:w-1/3 lg:w-1/4">
     <PokeCard style="padding: 0" :class="bg">
       <div class="card-body" style="position: relative">
+        <h1 class="poke-title" v-if="bg === 'pokeBolaActive'">
+          <span>#{{ item.id }} </span>
+          {{ item.name }}
+        </h1>
         <div class="flip" :class="rotate">
           <img
             src="https://image.flaticon.com/icons/png/512/361/361998.png"
@@ -96,6 +100,13 @@ export default {
   padding: 20px;
   min-height: 82px;
   position: relative;
+}
+.poke-title {
+  font-family: "Acme", sans-serif !important;
+  font-size: 25px !important;
+  margin-top: -17px !important;
+  color: #000000;
+  text-transform: capitalize;
 }
 .flip {
   position: relative;
