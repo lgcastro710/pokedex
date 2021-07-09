@@ -1,5 +1,9 @@
 # pokedex
 
+
+# DEMO
+Ver github page: [https://lgcastro710.github.io/pokedex/](https://lgcastro710.github.io/pokedex/).
+
 ## Project setup
 ```
 yarn install
