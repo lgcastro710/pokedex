@@ -14,7 +14,7 @@
   width: 100%;
   min-height: 100vh;
   background-position: center;
-  background-attachment: fixed;
+
 }
 .btn-access {
   background: #ed5565;
