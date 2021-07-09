@@ -43,9 +43,10 @@
           sm:align-middle
           sm:max-w-lg
           sm:w-full
+          w-full
         "
       >
-        <div class="bg-white relative" :style="bgColorClass">
+        <div class="bg-white relative w-full" :style="bgColorClass">
           <BgCard :floorColor="floorColor"></BgCard>
           <div
             class="
@@ -69,20 +70,10 @@
                   text-gray-900
                   absolute
                   capitalize
+                  title-modal
                 "
                 :style="colorTextClass"
-                style="
-                  color: rgb(255, 255, 255);
-                  padding-top: 15px;
-                  padding-bottom: 15px;
-                  border-radius: 0px 100px 100px 2px;
-                  top: 20px;
-                  left: -2px;
-                  width: auto;
-                  padding-left: 22px;
-                  padding-right: 25px;
-                  border-left: 0;
-                "
+
                 id="modal-title"
               >
                 {{ data.name }}
@@ -91,7 +82,7 @@
                 <img
                   :src="data.imageUrl"
                   @load="processImage"
-                  style="width: 330px; margin-top: 100px"
+                  class="img-modal"
                 />
               </div>
             </div>
@@ -99,15 +90,18 @@
         </div>
         <div
           class="
+            flex
+            flex-row-reverse
             bg-gray-50
             px-4
             py-3
             sm:px-6
             sm:flex sm:flex-row-reverse
             justify-between
+            items-center
           "
         >
-          <button v-on:click.prevent="onClose">
+          <button v-on:click.prevent="onClose" class="btn-close-modal">
             <i class="fa fa-close"></i>
           </button>
           <div style="display: flex">
@@ -122,7 +116,7 @@
               Altura:<span class="font-bold ml-2">{{ data.height }}</span>
             </p>
             <p class="text-black">
-              Peso:<span class="font-bold ml-2">{{ data.weight }}</span>
+              Peso:<span class="font-bold ml-4">{{ data.weight }}</span>
             </p>
           </div>
         </div>
@@ -179,3 +173,48 @@ export default {
   },
 };
 </script>
+<style>
+
+  .title-modal{
+    color: rgb(255, 255, 255);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 0px 100px 100px 2px;
+    top: 20px;
+    left: -2px;
+    width: auto;
+    padding-left: 22px;
+    padding-right: 25px;
+    border-left: 0;
+  }
+  .img-modal{
+    width: 330px;
+    margin-top: 100px
+  }
+  .btn-close-modal{
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ed5565;
+    background: #ed5565a3;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-close-modal:hover{
+    box-shadow: #ed5565 1px 1px 14px;
+  }
+  .btn-close-modal i{
+    font-size: 17px;
+    color: #ffffff;
+  }
+
+  @media (max-width: 600px) {
+ .img-modal{
+   margin-top: 0;
+ }
+    .title-modal{
+      margin-top: -30px;
+    }
+  }
+</style>

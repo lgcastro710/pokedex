@@ -107,8 +107,9 @@ input {
 h2,
 input,
 p {
-  font-family: "Montserrat", sans-serif !important;
+  font-family: "Acme", sans-serif !important;
   color: white;
+  font-size: 20px;
 }
 .search-input {
   width: 100%;

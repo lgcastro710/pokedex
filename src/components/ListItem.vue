@@ -33,7 +33,7 @@
           title="View"
           :onClick="setItemSelected"
           :data="item"
-          style="top: -20px"
+          class="btn-open-card"
         ></Button>
         <div style="display: flex">
           <PokePower
@@ -84,7 +84,7 @@ export default {
 </script>
 <style>
 .card-body {
-  height: 255px;
+  height: 280px;
   margin-top: 12px;
   display: flex;
   justify-content: center;
@@ -102,6 +102,12 @@ export default {
   padding: 20px;
   min-height: 82px;
   position: relative;
+}
+.btn-open-card{
+  top: -20px
+}
+.btn-open-card:hover{
+  box-shadow: #000 2px 2px 14px;
 }
 .poke-title {
   font-family: "Acme", sans-serif !important;

@@ -2,7 +2,7 @@
   <div class="container mx-auto" v-if="lista.length">
     <div class="px-8">
       <router-link to="/"
-        ><button class="btn-volver">Voler</button></router-link
+        ><button class="btn-volver">Volver</button></router-link
       >
     </div>
     <div class="flex p-4 flex-col md:flex-row">
@@ -63,4 +63,7 @@ export default {
   border-radius: 5px;
   margin-top: 10px;
 }
+  .btn-volver:hover{
+    box-shadow: rgb(21 123 255) 1px 1px 14px;
+  }
 </style>
