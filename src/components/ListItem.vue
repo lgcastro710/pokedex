@@ -1,6 +1,6 @@
 <template>
-  <li class="w-full p-4 md:w-1/3 lg:w-1/4">
-    <PokeCard style="padding: 0" :class="bg">
+  <li class="w-full p-4 md:w-1/3 lg:w-1/4" v-on:click.prevent="setItemSelected(item)">
+    <PokeCard style="padding: 0" :class="bg" >
       <div class="card-body" style="position: relative">
         <h1 class="poke-title" v-if="bg === 'pokeBolaActive'">
           <span>#{{ item.id }} </span>

@@ -44,6 +44,7 @@
           sm:max-w-lg
           sm:w-full
           w-full
+          modal-xs
         "
       >
         <div class="bg-white relative w-full" :style="bgColorClass">
@@ -215,6 +216,11 @@ export default {
  }
     .title-modal{
       margin-top: -30px;
+    }
+    .modal-xs{
+      position: absolute;
+      top: 120px;
+      width: 80%;
     }
   }
 </style>
