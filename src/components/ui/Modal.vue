@@ -97,18 +97,45 @@
             </div>
           </div>
         </div>
-        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <div
+          class="
+            bg-gray-50
+            px-4
+            py-3
+            sm:px-6
+            sm:flex sm:flex-row-reverse
+            justify-between
+          "
+        >
           <button v-on:click.prevent="onClose">
             <i class="fa fa-close"></i>
           </button>
+          <div style="display: flex">
+            <PokePower
+              v-for="(power, key) in data.types"
+              v-bind:key="key"
+              :type="power.type.name"
+            ></PokePower>
+          </div>
+          <div>
+            <p class="text-black">
+              Altura:<span class="font-bold ml-2">{{ data.height }}</span>
+            </p>
+            <p class="text-black">
+              Peso:<span class="font-bold ml-2">{{ data.weight }}</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import BgCard from "./BgCard";
 import Vibrant from "node-vibrant";
+import PokePower from "./PokePower";
+
 export default {
   name: "Modal",
   props: {
@@ -125,6 +152,7 @@ export default {
   },
   components: {
     BgCard,
+    PokePower,
   },
   methods: {
     async processImage(e) {
