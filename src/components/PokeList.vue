@@ -15,7 +15,7 @@
       />
     </div>
     <div class="p-4">
-      <FilterPower></FilterPower>
+      <FilterPower :power="power" :setPower="setPower"></FilterPower>
     </div>
     <Modal v-if="item" :onClose="onClose" :data="item"></Modal>
     <ul class="flex" style="flex-wrap: wrap">
@@ -23,7 +23,6 @@
         v-for="(item, key) in listaFiltrada"
         v-bind:key="key"
         :item="item"
-        :eliminar="eliminar"
         :setItem="setItem"
       ></LisItem>
     </ul>
@@ -37,7 +36,6 @@ export default {
   name: "List",
   props: {
     lista: Array,
-    eliminar: Function,
   },
   components: {
     LisItem,
@@ -47,7 +45,9 @@ export default {
   data: function () {
     return {
       txtBuscar: "",
+      power: "",
       item: null,
+      active: "",
     };
   },
   computed: {
@@ -55,21 +55,39 @@ export default {
       let arreglo = this.lista;
       const consulta = this.txtBuscar;
       if (consulta !== "") {
-        arreglo = this.lista?.filter(
-          ({ nombre, descripcion, precio }) =>
-            (
-              nombre.toLowerCase() +
-              " " +
-              descripcion.toLowerCase() +
-              " " +
-              precio.toLowerCase()
-            ).indexOf(consulta.toLowerCase()) > -1
-        );
+        arreglo = this.lista?.filter((pokemon) => {
+          const name = pokemon.name;
+          const id = String(pokemon.id);
+          return (
+            (name.toLowerCase() + " " + id.toLowerCase()).indexOf(
+              consulta.toLowerCase()
+            ) > -1
+          );
+        });
+      } else if (this.power !== "") {
+        arreglo = [];
+        this.lista?.filter((pokemon) => {
+          const type = pokemon.types.find(
+            (type) => type.type.name === this.power
+          );
+          console.log("....", type);
+          if (type) {
+            arreglo.push(pokemon);
+          }
+        });
       }
       return arreglo;
     },
   },
   methods: {
+    setPower: function (power) {
+      this.txtBuscar = "";
+      if (this.power === power) {
+        this.power = "";
+      } else {
+        this.power = power;
+      }
+    },
     setItem: function (item) {
       console.log("item", item);
       this.item = item;

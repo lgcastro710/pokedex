@@ -1,22 +1,18 @@
 <template>
   <div class="container-poke-power">
-    <div style="padding: 24px">
-      <PokePower type="wather" class="poke-power"></PokePower>
-    </div>
-    <div style="padding: 24px">
-      <PokePower type="fire" class="poke-power"></PokePower>
-    </div>
-    <div style="padding: 24px">
-      <PokePower type="grass" class="poke-power"></PokePower>
-    </div>
-    <div style="padding: 24px">
-      <PokePower type="ice" class="poke-power"></PokePower>
-    </div>
-    <div style="padding: 24px">
-      <PokePower type="rock" class="poke-power"></PokePower>
-    </div>
-    <div style="padding: 24px">
-      <PokePower type="ghost" class="poke-power"></PokePower>
+    <div class="wrapper-poke-power">
+      <div
+        v-for="(pokePower, key) in powers"
+        v-bind:key="key"
+        class="power-item"
+        v-on:click.prevent="setPower(pokePower)"
+      >
+        <PokePower
+          :type="pokePower"
+          class="poke-power"
+          :class="{ active: power === pokePower }"
+        ></PokePower>
+      </div>
     </div>
   </div>
 </template>
@@ -27,7 +23,7 @@ import PokePower from "../components/ui/PokePower";
 export default {
   data: () => ({
     powers: [
-      "wather",
+      "water",
       "fire",
       "grass",
       "ground",
@@ -50,6 +46,10 @@ export default {
   components: {
     PokePower,
   },
+  props: {
+    power: String,
+    setPower: Function,
+  },
 };
 </script>
 <style>
@@ -65,7 +65,14 @@ export default {
   border: solid 3px #4776fa;
   overflow-x: auto;
 }
-
+.wrapper-poke-power {
+  max-width: -webkit-fill-available;
+  display: flex;
+}
+.active {
+  box-shadow: rgb(255 255 255) 1px 1px 14px !important;
+  cursor: pointer;
+}
 .poke-power-active {
   box-shadow: rgb(21 123 255) 1px 1px 14px;
   cursor: pointer;
@@ -80,8 +87,12 @@ export default {
 .poke-power:hover {
   box-shadow: rgb(21 123 255) 1px 1px 14px;
 }
+.power-item {
+  padding: 24px;
+  float: left;
+}
 /* icons Powers */
-.wather {
+.water {
   background-position: -17px -19px;
 }
 
@@ -150,6 +161,6 @@ export default {
 }
 
 .fairy {
-  background-position: -228px -76px;
+  background-position: -228px -133px;
 }
 </style>

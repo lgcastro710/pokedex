@@ -33,7 +33,7 @@
           inline-block
           align-bottom
           bg-white
-          rounded-none rounded-lg
+          rounded-none
           text-left
           overflow-hidden
           shadow-xl
@@ -45,22 +45,54 @@
           sm:w-full
         "
       >
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <div class="sm:flex sm:items-start">
+        <div class="bg-white relative" :style="bgColorClass">
+          <BgCard :floorColor="floorColor"></BgCard>
+          <div
+            class="
+              sm:flex
+              sm:items-center
+              absolute
+              w-full
+              top-0
+              mt-7
+              flex
+              justify-center
+              items-center
+            "
+          >
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3
-                class="text-lg leading-6 font-medium text-gray-900"
+                class="
+                  text-lg
+                  leading-6
+                  font-medium
+                  text-gray-900
+                  absolute
+                  capitalize
+                "
+                :style="colorTextClass"
+                style="
+                  color: rgb(255, 255, 255);
+                  padding-top: 15px;
+                  padding-bottom: 15px;
+                  border-radius: 0px 100px 100px 2px;
+                  top: 20px;
+                  left: -2px;
+                  width: auto;
+                  padding-left: 22px;
+                  padding-right: 25px;
+                  border-left: 0;
+                "
                 id="modal-title"
               >
-                {{ data.nombre }}
+                {{ data.name }}
               </h3>
               <div>
-                <img :src="data.imageUrl" style="width: 450px" />
-              </div>
-              <div class="mt-2">
-                <p class="text-sm text-gray-500">
-                  {{ data.descripcion }}
-                </p>
+                <img
+                  :src="data.imageUrl"
+                  @load="processImage"
+                  style="width: 330px; margin-top: 100px"
+                />
               </div>
             </div>
           </div>
@@ -75,33 +107,47 @@
   </div>
 </template>
 <script>
+import BgCard from "./BgCard";
+import Vibrant from "node-vibrant";
 export default {
   name: "Modal",
-  data: function () {
+  props: {
+    onClose: Function,
+    data: Object || String,
+  },
+  data() {
     return {
-      item: null,
+      bgColorClass: {},
+      colorTextClass: {},
+      bgLightMuted: {},
+      floorColor: "",
     };
   },
-  props: {
-    data: Object || String,
-    onClose: Function,
+  components: {
+    BgCard,
+  },
+  methods: {
+    async processImage(e) {
+      try {
+        const imgTest =
+          "https://cors-anywhere.herokuapp.com/" + e.target.currentSrc;
+        Vibrant.from(imgTest).getPalette((err, palette) => {
+          const colorSelected = "Vibrant";
+          this.bgColorClass = { backgroundColor: palette[colorSelected].hex };
+          this.colorTextClass = {
+            backgroundColor: palette.DarkMuted.hex,
+            color: palette.DarkMuted.titleTextColor,
+            border: `2px solid ${palette.DarkMuted.hex}`,
+          };
+          this.bgLightMuted = {
+            backgroundColor: palette.LightMuted.hex,
+          };
+          this.floorColor = palette.DarkVibrant.hex;
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
 </script>
-<style>
-.btn-modal {
-  border: 4px solid #000;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.btn-modal span {
-  background: black;
-  height: 15px;
-  width: 15px;
-  border-radius: 50%;
-}
-</style>

@@ -36,9 +36,11 @@
           style="top: -20px"
         ></Button>
         <div style="display: flex">
-          <PokePower type="wather"></PokePower>
-          <PokePower type="fire"></PokePower>
-          <PokePower type="grass"></PokePower>
+          <PokePower
+            v-for="(power, key) in item.types"
+            v-bind:key="key"
+            :type="power.type.name"
+          ></PokePower>
         </div>
       </div>
     </PokeCard>
