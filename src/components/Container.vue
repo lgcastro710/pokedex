@@ -28,7 +28,7 @@ export default {
   methods: {
     listarElementos: async function () {
       const pokeData = await axios
-        .get("https://pokeapi.co/api/v2/pokemon?limit=20&offset=000")
+        .get("https://pokeapi.co/api/v2/pokemon?limit=150&offset=000")
         .then((response) => response.data.results);
       pokeData.forEach(async (pokeInfo) => {
         const pokemon = await axios
@@ -63,7 +63,7 @@ export default {
   border-radius: 5px;
   margin-top: 10px;
 }
-  .btn-volver:hover{
-    box-shadow: rgb(21 123 255) 1px 1px 14px;
-  }
+.btn-volver:hover {
+  box-shadow: rgb(21 123 255) 1px 1px 14px;
+}
 </style>
