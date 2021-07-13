@@ -1,5 +1,9 @@
 <template>
-  <div class="container mx-auto" v-if="lista.length">
+  <div
+    class="container mx-auto"
+    v-if="lista.length"
+    :handleScroll="handleScroll"
+  >
     <div class="px-8">
       <router-link to="/"
         ><button class="btn-volver">Volver</button></router-link
@@ -24,11 +28,16 @@ export default {
   },
   data: () => ({
     lista: [],
+    offset: 0,
   }),
   methods: {
     listarElementos: async function () {
       const pokeData = await axios
-        .get("https://pokeapi.co/api/v2/pokemon?limit=150&offset=000")
+        .get(
+          `https://pokeapi.co/api/v2/pokemon?limit=${
+            this.lista.length ? 10 : 20
+          }&offset=${this.offset}`
+        )
         .then((response) => response.data.results);
       pokeData.forEach(async (pokeInfo) => {
         const pokemon = await axios
@@ -45,9 +54,35 @@ export default {
         this.lista.push(pokemon);
       });
     },
+    handleScroll() {
+      window.onscroll = () => {
+        const scrollTop = parseInt(
+          Math.ceil(document.documentElement.scrollTop)
+        );
+
+        const innerHeight = window.innerHeight;
+        const offsetHeight = document.documentElement.offsetHeight;
+
+        const bottomOfWindow = scrollTop + innerHeight === offsetHeight;
+        console.log(
+          bottomOfWindow,
+          parseInt(scrollTop.toFixed(0)),
+          innerHeight,
+          offsetHeight
+        );
+        if (bottomOfWindow) {
+          this.offset += 10;
+          this.listarElementos();
+        }
+      };
+    },
   },
   created: function () {
     this.listarElementos();
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>

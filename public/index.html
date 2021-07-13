@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet"> 
 </head>
+<script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
 <style type="text/css">
   ::-webkit-scrollbar {
     width: 10px;
@@ -51,7 +52,7 @@
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app" data-infinite-scroll='{ "path": ".pagination__next", "append": ".post", "history": false }'></div>
     <!-- built files will be auto injected -->
   </body>
 </html>
