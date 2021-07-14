@@ -16,8 +16,6 @@
             class="flip-2"
             style="
               background-color: black;
-              background-image: url(https://image.freepik.com/foto-gratis/pared-estudio-negro-horizontal-pizarra-sala-exposicion-fondo-producto-presentacion_28629-837.jpg);
-              background-size: contain;
               width: 200px;
               height: 200px;
               border-radius: 50%;
