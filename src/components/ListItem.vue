@@ -71,7 +71,7 @@ export default {
       setTimeout(() => {
         this.rotate = "flip-rotate";
         this.bg = "pokeBolaActive";
-      }, 1000);
+      }, 1500);
     },
     setItemSelected: function (item) {
       this.setItem(item);
