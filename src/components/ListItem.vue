@@ -8,7 +8,7 @@
         </h1>
         <div class="flip" :class="rotate">
           <img
-            src="https://image.flaticon.com/icons/png/512/361/361998.png"
+            src="../assets/pokebola.png"
             style="max-width: 200px; border-radius: 50%"
             class="flip-1"
           />
