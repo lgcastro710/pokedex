@@ -41,7 +41,8 @@
   }
   .logo-access{
     width: 380px;
-    min-height: 140px
+    min-height: 140px;
+    margin-top: 50px;
   }
   .btn-access {
     order: 0;
